@@ -5,7 +5,7 @@
           "name": "C++ Launch",
           "type": "cppdbg",
           "request": "launch",
-          "program": "${workspaceFolder}/build/MyProject", // Adjust the path to your built executable
+          "program": "${workspaceFolder}/build/IfcExplorer", // Adjust the path to your built executable
           "args": [],
           "stopAtEntry": false,
           "cwd": "${workspaceFolder}",

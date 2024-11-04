@@ -1,27 +1,21 @@
-# Minimum CMake version required
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.15)
+project(IfcExplorer CXX)
 
-# Project name
-project(MyProject)
-
-# Set the C++ standard
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-# Add the SQLite source files
-set(SQLITE_SOURCE_FILES
-    external/sqlite/sqlite3.c
-    external/sqlite/sqlite3.h
-)
-
-# Collect all source files in the 'src' directory
 file(GLOB SOURCES "src/*.cpp")
 
-# Add the executable target
-add_executable(MyProject ${SOURCES} ${SQLITE_SOURCE_FILES})
+add_executable(IfcExplorer ${SOURCES})
+
+install(TARGETS IfcExplorer DESTINATION "."
+        RUNTIME DESTINATION bin
+        ARCHIVE DESTINATION lib
+        LIBRARY DESTINATION lib
+        )
 
 # (Optional) Include directories for SQLite
-target_include_directories(MyProject PRIVATE external/sqlite)
+target_include_directories(IfcExplorer PRIVATE external/sqlite)
 
 # (Optional) Specify include directories
 # target_include_directories(MyProject PUBLIC /path/to/includes)

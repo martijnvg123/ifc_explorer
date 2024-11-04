@@ -1,11 +1,76 @@
 #include <iostream>
-#include <cstddef>
+#include <fstream>
+#include <string>
+#include <filesystem>
+#include <map>
+#include <vector>
 
-#include <sqlite3.h>
+#include "IFC4X3_RC2.hxx"
+
+const std::filesystem::path TEST_FILE{"./test_data/SpatialStructure_2.ifc"};
+
+enum class IfcSchema
+{
+    IFC4X3_RC2,
+    IFC2x3, //?
+};
+
+std::map<std::string, IfcSchema> IFC_SCHEMA_MAP{
+    {"IFC4X3_RC2", IfcSchema::IFC4X3_RC2},
+    {"IFC2x3", IfcSchema::IFC2x3}
+};
+
+class IfcHeader
+{
+    IfcHeader(IfcSchema schema)
+    {
+        Schema = schema;
+    };
+
+    IfcSchema Schema;
+
+};
+
+class IfcFile
+{
+    public:
+    // IfcFile() {};
+
+    IfcHeader Header;
+};
 
 int main() 
 {
-    
+    std::ifstream file(TEST_FILE);
+
+    std::string line;
+
+    if(file.is_open())
+    {
+        std::vector<std::string> headerLines{};
+        bool isHeader = false;
+        bool headerRead = false;
+
+        while(std::getline(file, line))
+        {
+            if(line == "HEADER")
+            {
+                isHeader = true;
+                continue;
+            }
+
+            if(isHeader && !headerRead)
+            {
+                headerLines.emplace_back(line);
+            }
+
+            std::cout << line << std::endl;
+        }
+        
+        // IfcHeader header{IfcSchema::IFC4X3_RC2};
+        bool lel = true;
+    }
+
     // std::byte s{"test"};
     std::cout << "Test" << std::endl;
     std::cout << "Test2" << std::endl;
