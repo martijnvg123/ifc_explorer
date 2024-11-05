@@ -7,7 +7,7 @@
           "request": "launch",
           "program": "${workspaceFolder}/build/IfcExplorer", // Adjust the path to your built executable
           "args": [],
-          "stopAtEntry": false,
+          "stopAtEntry": true,
           "cwd": "${workspaceFolder}",
           "environment": [],
           "externalConsole": false,

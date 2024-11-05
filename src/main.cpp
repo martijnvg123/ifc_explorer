@@ -39,32 +39,41 @@ class IfcFile
     IfcHeader Header;
 };
 
+const std::string_view LEND = ";";
 int main() 
 {
     std::ifstream file(TEST_FILE);
 
     std::string line;
+    std::vector<std::string> statements{};
 
     if(file.is_open())
     {
-        std::vector<std::string> headerLines{};
-        bool isHeader = false;
-        bool headerRead = false;
+        std::string lineBuffer{};
 
-        while(std::getline(file, line))
+         while(std::getline(file, line))
         {
-            if(line == "HEADER")
+            lineBuffer.append(line);
+            if(line.contains(LEND))
             {
-                isHeader = true;
-                continue;
+                statements.push_back(std::move(lineBuffer));
+                bool test = false;
+
             }
 
-            if(isHeader && !headerRead)
-            {
-                headerLines.emplace_back(line);
-            }
 
-            std::cout << line << std::endl;
+            // if(line == "HEADER")
+            // {
+            //     isHeader = true;
+            //     continue;
+            // }
+
+            // if(isHeader && !headerRead)
+            // {
+            //     headerLines.emplace_back(line);
+            // }
+
+            // std::cout << line << std::endl;
         }
         
         // IfcHeader header{IfcSchema::IFC4X3_RC2};
@@ -73,7 +82,7 @@ int main()
 
     // std::byte s{"test"};
     std::cout << "Test" << std::endl;
-    std::cout << "Test2" << std::endl;
+    std::cout << "Test35" << std::endl;
     // std::cout << s << std::endl;
     return 0;
 }
